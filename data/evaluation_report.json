@@ -1,0 +1,210 @@
+{
+  "total_questions": 20,
+  "hit_rate_at_k_percent": 95.0,
+  "mrr": 0.95,
+  "avg_latency_ms": 48.32,
+  "grounded_rate_percent": 100.0,
+  "top_k_evaluated": 5,
+  "detailed_results": [
+    {
+      "id": "q01",
+      "question": "What is the difference between EC2 instance types like t3 and c5?",
+      "category": "EC2",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 109.22,
+      "num_sources": 2
+    },
+    {
+      "id": "q02",
+      "question": "How do I fix a Permission denied (publickey) error when connecting to EC2?",
+      "category": "troubleshooting",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 30.85,
+      "num_sources": 2
+    },
+    {
+      "id": "q03",
+      "question": "What causes Connection timed out when SSHing into an EC2 instance?",
+      "category": "troubleshooting",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 33.66,
+      "num_sources": 1
+    },
+    {
+      "id": "q04",
+      "question": "What commands are needed to connect to an EC2 Linux instance via SSH?",
+      "category": "EC2",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 31.88,
+      "num_sources": 1
+    },
+    {
+      "id": "q05",
+      "question": "What is the default SSH username for Amazon Linux vs Ubuntu?",
+      "category": "EC2",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 41.65,
+      "num_sources": 1
+    },
+    {
+      "id": "q06",
+      "question": "How do I troubleshoot an S3 NoSuchBucket error?",
+      "category": "troubleshooting",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 44.69,
+      "num_sources": 2
+    },
+    {
+      "id": "q07",
+      "question": "Why am I receiving an AccessDenied error when downloading an S3 object?",
+      "category": "troubleshooting",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 53.47,
+      "num_sources": 2
+    },
+    {
+      "id": "q08",
+      "question": "What are S3 Block Public Access settings?",
+      "category": "security",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 40.69,
+      "num_sources": 2
+    },
+    {
+      "id": "q09",
+      "question": "How do S3 Lifecycle policies automatically move objects to Glacier?",
+      "category": "S3",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 41.89,
+      "num_sources": 1
+    },
+    {
+      "id": "q10",
+      "question": "What are S3 bucket naming rules?",
+      "category": "S3",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 43.9,
+      "num_sources": 1
+    },
+    {
+      "id": "q11",
+      "question": "How do I solve Task timed out after 3.00 seconds in AWS Lambda?",
+      "category": "troubleshooting",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 55.05,
+      "num_sources": 2
+    },
+    {
+      "id": "q12",
+      "question": "How do I fix Runtime.ImportModuleError in AWS Lambda?",
+      "category": "troubleshooting",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 49.86,
+      "num_sources": 1
+    },
+    {
+      "id": "q13",
+      "question": "What is a Lambda Execution Role?",
+      "category": "Lambda",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 40.41,
+      "num_sources": 1
+    },
+    {
+      "id": "q14",
+      "question": "How do I invoke a Lambda function using AWS CLI?",
+      "category": "Lambda",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 45.8,
+      "num_sources": 1
+    },
+    {
+      "id": "q15",
+      "question": "What is a Lambda cold start and how does it happen?",
+      "category": "Lambda",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 51.8,
+      "num_sources": 1
+    },
+    {
+      "id": "q16",
+      "question": "What is the IAM Principle of Least Privilege?",
+      "category": "security",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 46.41,
+      "num_sources": 1
+    },
+    {
+      "id": "q17",
+      "question": "Why should I use IAM Roles instead of IAM Access Keys?",
+      "category": "security",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 47.9,
+      "num_sources": 2
+    },
+    {
+      "id": "q18",
+      "question": "How does AWS evaluate IAM explicit deny versus allow statements?",
+      "category": "IAM",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 48.86,
+      "num_sources": 2
+    },
+    {
+      "id": "q19",
+      "question": "How do I resolve an AccessDenied error when calling sts:AssumeRole?",
+      "category": "troubleshooting",
+      "hit": true,
+      "rank": 1,
+      "is_grounded": true,
+      "latency_ms": 52.76,
+      "num_sources": 2
+    },
+    {
+      "id": "q20",
+      "question": "What is Azure Virtual Machine pricing?",
+      "category": "general AWS",
+      "hit": false,
+      "rank": 0,
+      "is_grounded": true,
+      "latency_ms": 55.6,
+      "num_sources": 1
+    }
+  ]
+}

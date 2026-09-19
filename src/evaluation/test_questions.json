@@ -1,0 +1,142 @@
+[
+  {
+    "id": "q01",
+    "question": "What is the difference between EC2 instance types like t3 and c5?",
+    "category": "EC2",
+    "expected_service": "Amazon EC2",
+    "keywords": ["t3", "c5", "compute", "general purpose"]
+  },
+  {
+    "id": "q02",
+    "question": "How do I fix a Permission denied (publickey) error when connecting to EC2?",
+    "category": "troubleshooting",
+    "expected_service": "Amazon EC2",
+    "keywords": ["Permission denied", "publickey", "chmod 400", "username"]
+  },
+  {
+    "id": "q03",
+    "question": "What causes Connection timed out when SSHing into an EC2 instance?",
+    "category": "troubleshooting",
+    "expected_service": "Amazon EC2",
+    "keywords": ["timed out", "Security Group", "port 22", "route table"]
+  },
+  {
+    "id": "q04",
+    "question": "What commands are needed to connect to an EC2 Linux instance via SSH?",
+    "category": "EC2",
+    "expected_service": "Amazon EC2",
+    "keywords": ["ssh -i", "chmod 400", "ec2-user"]
+  },
+  {
+    "id": "q05",
+    "question": "What is the default SSH username for Amazon Linux vs Ubuntu?",
+    "category": "EC2",
+    "expected_service": "Amazon EC2",
+    "keywords": ["ec2-user", "ubuntu"]
+  },
+  {
+    "id": "q06",
+    "question": "How do I troubleshoot an S3 NoSuchBucket error?",
+    "category": "troubleshooting",
+    "expected_service": "Amazon S3",
+    "keywords": ["NoSuchBucket", "region", "spelling", "404"]
+  },
+  {
+    "id": "q07",
+    "question": "Why am I receiving an AccessDenied error when downloading an S3 object?",
+    "category": "troubleshooting",
+    "expected_service": "Amazon S3",
+    "keywords": ["AccessDenied", "Block Public Access", "KMS", "s3:GetObject"]
+  },
+  {
+    "id": "q08",
+    "question": "What are S3 Block Public Access settings?",
+    "category": "security",
+    "expected_service": "Amazon S3",
+    "keywords": ["Block Public Access", "ACL", "bucket policy"]
+  },
+  {
+    "id": "q09",
+    "question": "How do S3 Lifecycle policies automatically move objects to Glacier?",
+    "category": "S3",
+    "expected_service": "Amazon S3",
+    "keywords": ["Lifecycle", "Glacier", "Expiration", "Transitions"]
+  },
+  {
+    "id": "q10",
+    "question": "What are S3 bucket naming rules?",
+    "category": "S3",
+    "expected_service": "Amazon S3",
+    "keywords": ["globally unique", "DNS", "lowercase"]
+  },
+  {
+    "id": "q11",
+    "question": "How do I solve Task timed out after 3.00 seconds in AWS Lambda?",
+    "category": "troubleshooting",
+    "expected_service": "AWS Lambda",
+    "keywords": ["timed out", "timeout", "NAT Gateway", "VPC"]
+  },
+  {
+    "id": "q12",
+    "question": "How do I fix Runtime.ImportModuleError in AWS Lambda?",
+    "category": "troubleshooting",
+    "expected_service": "AWS Lambda",
+    "keywords": ["ImportModuleError", "handler", "lambda_function", "dependencies"]
+  },
+  {
+    "id": "q13",
+    "question": "What is a Lambda Execution Role?",
+    "category": "Lambda",
+    "expected_service": "AWS Lambda",
+    "keywords": ["Execution Role", "IAM role", "assume"]
+  },
+  {
+    "id": "q14",
+    "question": "How do I invoke a Lambda function using AWS CLI?",
+    "category": "Lambda",
+    "expected_service": "AWS Lambda",
+    "keywords": ["aws lambda invoke", "payload", "response.json"]
+  },
+  {
+    "id": "q15",
+    "question": "What is a Lambda cold start and how does it happen?",
+    "category": "Lambda",
+    "expected_service": "AWS Lambda",
+    "keywords": ["Cold Starts", "initialization", "container"]
+  },
+  {
+    "id": "q16",
+    "question": "What is the IAM Principle of Least Privilege?",
+    "category": "security",
+    "expected_service": "AWS IAM",
+    "keywords": ["Least Privilege", "minimum permissions", "wildcard"]
+  },
+  {
+    "id": "q17",
+    "question": "Why should I use IAM Roles instead of IAM Access Keys?",
+    "category": "security",
+    "expected_service": "AWS IAM",
+    "keywords": ["Access Keys", "IAM Roles", "STS", "temporary"]
+  },
+  {
+    "id": "q18",
+    "question": "How does AWS evaluate IAM explicit deny versus allow statements?",
+    "category": "IAM",
+    "expected_service": "AWS IAM",
+    "keywords": ["explicit deny", "implicit deny", "override"]
+  },
+  {
+    "id": "q19",
+    "question": "How do I resolve an AccessDenied error when calling sts:AssumeRole?",
+    "category": "troubleshooting",
+    "expected_service": "AWS IAM",
+    "keywords": ["sts:AssumeRole", "Trust Policy", "Principal"]
+  },
+  {
+    "id": "q20",
+    "question": "What is Azure Virtual Machine pricing?",
+    "category": "general AWS",
+    "expected_service": "General AWS Support",
+    "keywords": ["not available", "Azure", "out of scope"]
+  }
+]

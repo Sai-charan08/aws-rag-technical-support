@@ -30,6 +30,10 @@ class LLMClient:
             logger.warning("GEMINI_API_KEY is missing. Falling back to 'demo' mode.")
             self.provider = "demo"
 
+        # Sanitize model name if provider is gemini but model is default OpenAI model name
+        if self.provider == "gemini" and (not self.model_name or "gpt" in self.model_name.lower()):
+            self.model_name = "gemini-1.5-flash"
+
     def generate_response(self, query: str, context_chunks: List[RetrievedChunk]) -> str:
         if not context_chunks:
             return (
@@ -70,16 +74,40 @@ class LLMClient:
             return f"*(OpenAI Generation Error: {str(e)})*\n\n" + self._generate_demo_mode(query, [])
 
     def _generate_gemini(self, query: str, context_str: str) -> str:
-        try:
-            import google.generativeai as genai
-            genai.configure(api_key=self.gemini_api_key)
-            model = genai.GenerativeModel(self.model_name or "gemini-1.5-flash")
-            prompt = SYSTEM_PROMPT_TEMPLATE.format(context_str=context_str, user_query=query)
-            response = model.generate_content(prompt)
-            return response.text.strip()
-        except Exception as e:
-            logger.error(f"Gemini Generation error: {e}. Falling back to demo mode.")
-            return f"*(Gemini Generation Error: {str(e)})*\n\n" + self._generate_demo_mode(query, [])
+        import google.generativeai as genai
+        genai.configure(api_key=self.gemini_api_key)
+        prompt = SYSTEM_PROMPT_TEMPLATE.format(context_str=context_str, user_query=query)
+
+        # Candidate models to try in order
+        candidate_models = []
+        if self.model_name and "gpt" not in self.model_name.lower():
+            candidate_models.append(self.model_name)
+        
+        default_candidates = [
+            "gemini-1.5-flash",
+            "gemini-2.0-flash",
+            "gemini-1.5-pro",
+            "gemini-pro"
+        ]
+        for candidate in default_candidates:
+            if candidate not in candidate_models:
+                candidate_models.append(candidate)
+
+        last_exception = None
+        for model_name in candidate_models:
+            try:
+                logger.info(f"Attempting Gemini generation with model: {model_name}")
+                model = genai.GenerativeModel(model_name)
+                response = model.generate_content(prompt)
+                if response and response.text:
+                    return response.text.strip()
+            except Exception as e:
+                logger.warning(f"Gemini model '{model_name}' failed: {e}")
+                last_exception = e
+
+        logger.error(f"All Gemini models failed. Last error: {last_exception}. Falling back to demo mode.")
+        return f"*(Gemini Generation Error: {str(last_exception)})*\n\n" + self._generate_demo_mode(query, [])
+
 
     def _generate_demo_mode(self, query: str, context_chunks: List[RetrievedChunk]) -> str:
         """Synthesizes structured extractive output when no LLM API key is configured."""

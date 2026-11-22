@@ -24,12 +24,23 @@ def test_rag_pipeline_grounded_response(setup_rag_pipeline):
     assert "answer" in response
     assert "sources" in response
     assert "metadata" in response
+    assert "classification" in response
+    assert response["classification"]["service"] == "Amazon S3"
     assert response["metadata"]["is_grounded"] is True
     assert len(response["sources"]) > 0
 
-def test_rag_pipeline_ungrounded_query(setup_rag_pipeline):
+def test_rag_pipeline_ungrounded_out_of_scope_query(setup_rag_pipeline):
     pipeline = setup_rag_pipeline
-    # Ask out-of-scope query
-    response = pipeline.get_rag_response("What is quantum computing teleportation protocol in physics?")
+    response = pipeline.get_rag_response("How do I deploy an application on Azure Virtual Machines?")
     assert "answer" in response
-    assert response["metadata"]["is_grounded"] is False or len(response["sources"]) == 0
+    assert "Out-of-Scope" in response["answer"] or response["metadata"]["is_grounded"] is False
+    assert response["metadata"]["is_grounded"] is False
+    assert len(response["sources"]) == 0
+
+def test_rag_pipeline_greeting(setup_rag_pipeline):
+    pipeline = setup_rag_pipeline
+    response = pipeline.get_rag_response("hello")
+    assert "answer" in response
+    assert "Hello!" in response["answer"]
+    assert response["classification"]["intent"] == "GREETING"
+    assert response["metadata"]["is_grounded"] is True

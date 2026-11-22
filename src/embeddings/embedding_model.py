@@ -1,3 +1,7 @@
+import os
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+
 from typing import List
 from sentence_transformers import SentenceTransformer
 from chromadb.api.types import EmbeddingFunction

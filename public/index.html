@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS Technical Support RAG Assistant</title>
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <!-- Markdown & Code highlighting libraries from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <!-- Navigation Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS Logo" class="aws-logo">
+      <div class="header-title">
+        <h1>AWS Technical Support Assistant</h1>
+        <p>Domain-Specific RAG • MySQL Database • Sub-Millisecond Classification</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div id="dbStatusBadge" class="status-badge online">
+        <span class="status-dot"></span> System Ready
+      </div>
+      <div id="userProfileArea" class="user-profile hidden">
+        <span id="userNameDisplay" class="user-name">User</span>
+        <span id="userRoleBadge" class="role-badge">USER</span>
+        <button id="logoutBtn" class="btn-logout" title="Sign Out">Sign Out</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="app-main">
+    <!-- AUTHENTICATION SCREEN (Shown when logged out) -->
+    <section id="authSection" class="auth-section">
+      <div class="auth-card">
+        <div class="auth-header">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" width="70">
+          <h2>Technical Support Portal</h2>
+          <p>Sign in to access your domain-specific technical assistance</p>
+        </div>
+
+        <div class="auth-tabs">
+          <button id="tabSignInBtn" class="tab-btn active">Sign In</button>
+          <button id="tabRegisterBtn" class="tab-btn">Create Account</button>
+          <button id="tabDemoBtn" class="tab-btn">⚡ Quick Access</button>
+        </div>
+
+        <!-- Sign In Form -->
+        <form id="loginForm" class="auth-form">
+          <div class="form-group">
+            <label for="loginIdentifier">Username or Email</label>
+            <input type="text" id="loginIdentifier" placeholder="e.g. demouser or user@example.com" required autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn-primary w-full">Sign In</button>
+          <div id="loginError" class="auth-error hidden"></div>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm" class="auth-form hidden">
+          <div class="form-group">
+            <label for="regUsername">Username</label>
+            <input type="text" id="regUsername" placeholder="e.g. cloud_engineer" required>
+          </div>
+          <div class="form-group">
+            <label for="regEmail">Email Address</label>
+            <input type="email" id="regEmail" placeholder="e.g. engineer@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="regPassword">Password (min 6 characters)</label>
+            <input type="password" id="regPassword" placeholder="Enter secure password" required>
+          </div>
+          <div class="form-group">
+            <label for="regRole">Role</label>
+            <select id="regRole">
+              <option value="user">Cloud Engineer</option>
+              <option value="admin">System Administrator</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary w-full">Create Account in MySQL</button>
+          <div id="registerError" class="auth-error hidden"></div>
+          <div id="registerSuccess" class="auth-success hidden"></div>
+        </form>
+
+        <!-- Quick Demo Access -->
+        <div id="demoTab" class="demo-tab hidden">
+          <p class="demo-info">Instant one-click evaluation access without manual registration:</p>
+          <button id="quickDemoBtn" class="btn-secondary w-full">🚀 Sign In as Demo User</button>
+          <button id="quickAdminBtn" class="btn-secondary w-full" style="margin-top: 0.6rem;">🛡️ Sign In as Admin</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD & CHAT SCREEN (Shown when logged in) -->
+    <section id="chatSection" class="chat-section hidden">
+      <!-- Sidebar Controls -->
+      <aside class="chat-sidebar">
+        <div class="sidebar-block">
+          <h3>🗄️ MySQL Database</h3>
+          <div class="stat-row">
+            <span>Engine:</span>
+            <strong id="dbEngineLabel">MySQL 8.0</strong>
+          </div>
+          <div class="stat-row">
+            <span>Database:</span>
+            <strong id="dbNameLabel">aws_support_rag</strong>
+          </div>
+          <div class="stat-row">
+            <span>Registered Users:</span>
+            <strong id="totalUsersCount">0</strong>
+          </div>
+          <div class="stat-row">
+            <span>Total Queries:</span>
+            <strong id="totalQueriesCount">0</strong>
+          </div>
+        </div>
+
+        <div class="sidebar-block">
+          <h3>⚡ Model Classification</h3>
+          <div class="stat-row">
+            <span>Architecture:</span>
+            <strong>TF-IDF Ensemble</strong>
+          </div>
+          <div class="stat-row">
+            <span>Inference Speed:</span>
+            <strong style="color: #10b981;">~0.9 ms</strong>
+          </div>
+          <div class="stat-row">
+            <span>Accuracy:</span>
+            <strong style="color: #10b981;">100.0%</strong>
+          </div>
+        </div>
+
+        <div class="sidebar-block">
+          <h3>🛠️ RAG Controls</h3>
+          <label for="topKRange">Top-K Chunks: <strong id="topKValue">5</strong></label>
+          <input type="range" id="topKRange" min="1" max="10" value="5">
+
+          <label for="thresholdRange" style="margin-top: 0.8rem;">Similarity Threshold: <strong id="thresholdValue">0.35</strong></label>
+          <input type="range" id="thresholdRange" min="0.1" max="0.8" step="0.05" value="0.35">
+        </div>
+
+        <div class="sidebar-block actions">
+          <button id="exportHistoryBtn" class="btn-outline w-full">📥 Export History (JSON)</button>
+          <button id="clearHistoryBtn" class="btn-danger w-full" style="margin-top: 0.6rem;">🗑️ Clear Conversation</button>
+        </div>
+      </aside>
+
+      <!-- Main Chat Area -->
+      <div class="chat-content">
+        <!-- Example Prompts Carousel -->
+        <div class="example-chips-wrapper">
+          <span class="chips-label">Quick Questions:</span>
+          <div class="chips-list">
+            <button class="chip-btn" data-query="Hello! How can you help me?">👋 Say Hello</button>
+            <button class="chip-btn" data-query="How do I fix a NoSuchBucket error in Amazon S3?">S3 NoSuchBucket</button>
+            <button class="chip-btn" data-query="How do I fix a Permission denied (publickey) error when connecting to EC2?">EC2 SSH Permission Denied</button>
+            <button class="chip-btn" data-query="How to resolve Task timed out after 3.00 seconds in AWS Lambda?">Lambda 3s Timeout</button>
+            <button class="chip-btn" data-query="What is the Principle of Least Privilege in AWS IAM?">IAM Least Privilege</button>
+            <button class="chip-btn" data-query="Give me the aws s3 sync command to copy local files to an S3 bucket">AWS S3 Sync CLI</button>
+            <button class="chip-btn" data-query="How do I deploy an application on Azure Virtual Machines?">Out-of-Scope (Azure)</button>
+          </div>
+        </div>
+
+        <!-- Chat Message Stream -->
+        <div id="chatMessages" class="chat-messages">
+          <div class="message assistant welcome">
+            <div class="message-bubble">
+              <h3>👋 Welcome to the AWS Technical Support Assistant</h3>
+              <p>Ask any technical question regarding <strong>Amazon EC2, Amazon S3, AWS Lambda,</strong> or <strong>AWS IAM</strong>. Every answer is grounded in authoritative documentation with direct troubleshooting steps and CLI commands.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Input Bar -->
+        <form id="chatForm" class="chat-input-bar">
+          <input type="text" id="chatInput" placeholder="Ask a technical AWS question (e.g. EC2 connection error, S3 permission, IAM policy)..." autocomplete="off" required>
+          <button type="submit" id="sendBtn" class="btn-send">
+            <span>Send</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

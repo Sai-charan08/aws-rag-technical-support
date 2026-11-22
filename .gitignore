@@ -16,6 +16,8 @@ venv.bak/
 
 # Vector database & persistent storage
 chroma_db/
+*.sqlite
+*.sqlite3
 data/raw/*
 !data/raw/.gitkeep
 
@@ -30,3 +32,9 @@ htmlcov/
 # OS specific
 .DS_Store
 Thumbs.db
+
+# IDEs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace

@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # MySQL Database Service
+  mysql:
+    image: mysql:8.0
+    container_name: aws_rag_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword123!
+      MYSQL_DATABASE: aws_support_rag
+      MYSQL_USER: rag_user
+      MYSQL_PASSWORD: rag_password123!
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword123!"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - rag_network
+
+  # RAG Assistant Application Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aws_rag_assistant_app
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_USER=rag_user
+      - MYSQL_PASSWORD=rag_password123!
+      - MYSQL_DATABASE=aws_support_rag
+      - DB_FALLBACK_SQLITE=false
+      - LLM_PROVIDER=demo
+      - EMBEDDING_MODEL_NAME=sentence-transformers/all-MiniLM-L6-v2
+      - CHROMA_DB_PATH=/app/chroma_db
+      - TOP_K=5
+      - SIMILARITY_THRESHOLD=0.35
+    ports:
+      - "8501:8501"
+    volumes:
+      - chroma_data:/app/chroma_db
+      - models_data:/app/models
+    networks:
+      - rag_network
+
+volumes:
+  mysql_data:
+    driver: local
+  chroma_data:
+    driver: local
+  models_data:
+    driver: local
+
+networks:
+  rag_network:
+    driver: bridge
+

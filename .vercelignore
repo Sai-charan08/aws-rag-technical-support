@@ -1,0 +1,11 @@
+.env
+.git
+.gitignore
+.pytest_cache
+tests/
+venv/
+.venv/
+chroma_db/
+data/raw/
+*.sqlite
+*.sqlite3

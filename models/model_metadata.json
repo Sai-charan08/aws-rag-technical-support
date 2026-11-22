@@ -1,0 +1,33 @@
+{
+  "model_name": "AWSSupportIntentClassifier-v2",
+  "algorithm": "TFIDF_LogisticRegression_Ensemble",
+  "total_samples": 92,
+  "intent_accuracy": 1.0,
+  "service_accuracy": 1.0,
+  "urgency_accuracy": 1.0,
+  "avg_inference_latency_ms": 1.33,
+  "intents": [
+    "CLI_SCRIPT_GENERATION",
+    "CONCEPTUAL_EXPLANATION",
+    "CONFIGURATION_SETUP",
+    "GREETING",
+    "OUT_OF_SCOPE",
+    "SECURITY_BEST_PRACTICE",
+    "TROUBLESHOOTING"
+  ],
+  "services": [
+    "AWS IAM",
+    "AWS Lambda",
+    "Amazon EC2",
+    "Amazon S3",
+    "General AWS",
+    "Out-of-Scope"
+  ],
+  "urgencies": [
+    "CRITICAL",
+    "HIGH",
+    "LOW",
+    "MEDIUM"
+  ],
+  "trained_at": "2026-11-22T09:35:08Z"
+}

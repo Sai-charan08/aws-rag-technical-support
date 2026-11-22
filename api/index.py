@@ -190,8 +190,15 @@ def get_audit_logs():
     logs = db.get_audit_logs(limit=25)
     return jsonify({"logs": logs})
 
-# Local dev server runner
+# Local server runner
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
-    print(f"Starting AWS Technical Support Assistant API on port {port}...")
-    app.run(host="0.0.0.0", port=port, debug=False)
+    print(f"\n" + "=" * 65)
+    print(f"  AWS Technical Support Assistant Server Ready!")
+    print(f"  Open in your browser: http://localhost:{port}")
+    print("=" * 65 + "\n")
+    try:
+        from waitress import serve
+        serve(app, host="0.0.0.0", port=port, _quiet=True)
+    except Exception:
+        app.run(host="0.0.0.0", port=port, debug=False)
